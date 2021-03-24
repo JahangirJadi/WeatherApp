@@ -35,7 +35,6 @@ android:layout_marginTop="200dp"
       <ImageView
           android:layout_width="100dp"
           android:layout_height="100dp"
-
           app:image="@{weather.weatherIcon}"
           />
 
