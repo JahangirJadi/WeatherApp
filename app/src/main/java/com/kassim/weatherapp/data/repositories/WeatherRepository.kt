@@ -7,4 +7,8 @@ class WeatherRepository(private val api: WeatherApi) :
     suspend fun getWeatherByGeoPos(latLng: String) = apiRequest {
         api.getWeatherWithGeoPos(latLng)
     }
+
+    suspend fun getCurrentWeatherCondition(cityId: Int) = apiRequest {
+         api.getCurrentWeatherCondition(cityId)
+    }
 }

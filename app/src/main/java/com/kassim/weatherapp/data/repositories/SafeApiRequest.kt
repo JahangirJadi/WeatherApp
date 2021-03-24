@@ -1,5 +1,7 @@
 package com.kassim.weatherapp.data.repositories
 
+import org.json.JSONException
+import org.json.JSONObject
 import retrofit2.Response
 import java.io.IOException
 
@@ -10,7 +12,19 @@ abstract class SafeApiRequest {
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw ApiException(response.code().toString())
+//            val error = response.errorBody()?.toString()
+//            val message = StringBuilder()
+//            error?.let {
+//                try {
+//                    message.append(JSONObject(it).getString("message"))
+//                } catch (e: JSONException) {
+//
+//                }
+//                message.append("\n")
+//
+//            }
+//            message.append("Error code: ${response.code()}")
+            throw ApiException(response.errorBody().toString())
         }
     }
 }

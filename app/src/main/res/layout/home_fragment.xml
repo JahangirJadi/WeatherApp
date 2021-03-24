@@ -1,13 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.Home.HomeFragment">
 
-    <TextView
+    <data>
+        <variable
+            name="weather"
+            type="com.kassim.weatherapp.data.models.CurrentWeather" />
+    </data>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:background="@drawable/background_gradient">
 
-</FrameLayout>
+  <LinearLayout
+      android:layout_centerHorizontal="true"
+android:layout_marginTop="200dp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+      <TextView
+          android:layout_marginTop="40dp"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_margin="8dp"
+          android:fontFamily="monospace"
+          android:text="@{weather.weatherText}"
+          android:textColor="@android:color/white"
+          android:textSize="24sp" />
+
+      <ImageView
+          android:layout_width="100dp"
+          android:layout_height="100dp"
+
+          app:image="@{weather.weatherIcon}"
+          />
+
+
+  </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="8dp"
+            android:fontFamily="monospace"
+            android:textColor="@android:color/white"
+            android:text="@{Double.toString(weather.component8().metric.component3()) + `°C`}"
+            android:textSize="56sp" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+</layout>
