@@ -9,29 +9,13 @@ import java.io.IOException
 
 abstract class SafeApiRequest {
 
-    fun Context.isInternetAvailable(): Boolean {
-        return if (this != null) {
-            try {
-                val cm =
-                    getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-                val activeNetwork = cm.activeNetworkInfo
-                activeNetwork != null &&
-                        activeNetwork.isConnectedOrConnecting
-            } catch (ex: Exception) {
-                ex.printStackTrace()
-                false
-            }
-        } else {
-            false
-        }
-    }
 
     suspend fun <T : Any> apiRequest(call: suspend () -> Response<T>): T {
         val response = call.invoke()
+
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-
 //            val error = response.errorBody()?.toString()
 //            val message = StringBuilder()
 //            error?.let {
