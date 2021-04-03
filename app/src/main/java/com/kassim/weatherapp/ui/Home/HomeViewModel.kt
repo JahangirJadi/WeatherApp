@@ -16,7 +16,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
-    private val repository: RemoteRepository,
+    private val repository: WeatherRepository,
     private val context: Context
 
 ) : ViewModel() {
@@ -30,31 +30,27 @@ class HomeViewModel(
         get() = _weatherReport
 
 
-
     fun getWeatherReport() {
 
-        viewModelScopeIO.launch {
-           val list = repository.getCurrentWeatherCondition(260795)
+//        viewModelScopeIO.launch {
+//           val list = repository.getCurrentWeatherCondition(260795)
+//
+//            when(list){
+//                is Success->{
+//                    _weatherReport.value = list
+//                }
+//            }
+//
+//
+//        }
 
-            when(list){
-                is Success->{
-                    _weatherReport.value = list
-                }
+        job = Coroutines.ioThenMain(
+            {
+                repository.getCurrentWeatherCondition(260795)
+            }, {
+                _weatherReport.value = it
             }
-
-
-        }
-
-
-            job = Coroutines.ioThenMain(
-                {
-                    repository.getCurrentWeatherCondition(260795)
-                }, {
-                    _weatherReport.value = it
-                }
-            )
-
-
+        )
 
 
     }
